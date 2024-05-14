@@ -35,6 +35,9 @@ public class Student {
     @Column(name="date_of_birth", length = 255)
     private String date_of_birth;
 
+    @Column(name="gender", length = 10)
+    private String gender;
+
     @Column(name="interest_gender", length = 255)
     private String interest_gender;
 

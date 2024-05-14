@@ -20,10 +20,10 @@ public class studentController {
 
 
     @PostMapping(path = "/save")
-    public String saveEmployee(@RequestBody StudentDTO studentDTO)
+    public ResponseEntity<?> saveEmployee(@RequestBody StudentDTO studentDTO)
     {
-        String id = studentService.addStudent(studentDTO);
-        return id;
+        LoginResponse loginResponse = studentService.addStudent(studentDTO);
+        return ResponseEntity.ok(loginResponse);
     }
 
     @PostMapping(path = "/login")

@@ -20,6 +20,7 @@ public class StudentDTO {
     private String faculty;
     private String address;
     private String date_of_birth;
+    private String gender;
     private String interest_gender;
     private String interest_age_limit;
     private String interest_distric;

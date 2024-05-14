@@ -22,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepo studentRepo;
     @Override
-    public String addStudent(StudentDTO studentDTO) {
+    public LoginResponse addStudent(StudentDTO studentDTO) {
         Student student = new Student(
                 studentDTO.getStudentId(),
                 studentDTO.getStudentName(),
@@ -31,6 +31,7 @@ public class StudentServiceImpl implements StudentService {
                 studentDTO.getFaculty(),
                 studentDTO.getAddress(),
                 studentDTO.getDate_of_birth(),
+                studentDTO.getGender(),
                 studentDTO.getInterest_gender(),
                 studentDTO.getInterest_age_limit(),
                 studentDTO.getInterest_distric(),
@@ -38,12 +39,16 @@ public class StudentServiceImpl implements StudentService {
                 this.passwordEncoder.encode(studentDTO.getPassword())
         );
 
+        Student student1 = studentRepo.findByEmail(studentDTO.getEmail());
+        if(student1!=null){
+            return new LoginResponse("Already Registered", false);
+        }
         studentRepo.save(student);
-        return student.getStudentName();
+        return new LoginResponse("Register Success", false);
     }
 
     @Override
-    public LoginResponse  loginStudent(LoginDTO loginDTO) {
+    public LoginResponse loginStudent(LoginDTO loginDTO) {
         String msg = "";
         Student student1 = studentRepo.findByEmail(loginDTO.getEmail());
         if (student1 != null) {

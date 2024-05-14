@@ -7,7 +7,7 @@ import com.campus_date.response.LoginResponse;
 import java.util.List;
 
 public interface StudentService {
-    String addStudent(StudentDTO studentDTO);
+    LoginResponse addStudent(StudentDTO studentDTO);
 
     LoginResponse loginStudent(LoginDTO loginDTO);
 

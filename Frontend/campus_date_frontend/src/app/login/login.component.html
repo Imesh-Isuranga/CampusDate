@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<div class="outer-wrap">
+  <div class="inner-wrap row">
+    <div class="left-wrap col-12 col-sm-12 col-md-4 col-lg-4">
+      <img class="left-wrap" style="height: 100%; width: 100%;" src="../../assets/registration/1.jpg" alt="">
+    </div>
+    <div class="right-wrap row text col-12 col-sm-12 col-md-7 col-lg-8">
+      <form [formGroup]="loginDataForm" style="width: 100%;">
+        <div class="inner-form">
+          <mat-card-header>
+            <mat-card-title><p>Login</p></mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                <mat-form-field style="width: 100%;" appearance="outline" color="primary">
+                  <mat-label style="color: rgb(255, 234, 251);">Email</mat-label>
+                  <input matInput formControlName="email"  style="color: aliceblue;">
+                </mat-form-field>
+              </div>
+              <div class=" col-12 col-sm-12 col-md-7 col-lg-7">
+                <mat-form-field style="width: 100%;" appearance="outline" color="primary">
+                  <mat-label style="color: rgb(255, 234, 251);">Password</mat-label>
+                  <input  matInput formControlName="password" style="color: aliceblue;">
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button (click)="loginForm()" mat-raised-button>Login</button>
+          </mat-card-actions>
+          <mat-card-actions>
+            <a routerLink="/register" style="margin-left: 10px; color: white;">I don't have account</a>
+          </mat-card-actions>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>
