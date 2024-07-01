@@ -16,6 +16,9 @@ export class LoginComponent {
   // Boolean flag to indicate whether a user was not found during login
   userNotFound: boolean = false;
 
+  emailNotFount : boolean = false;
+  passwrong : boolean = false;
+
   constructor(private userService: UserService, private formBuilder:FormBuilder,private http:HttpClient,private router:Router){
         // Check if the user is already logged in, and if so, redirect to the chat page
      /* if (localStorage.getItem('user') != null) {
@@ -32,18 +35,27 @@ export class LoginComponent {
 
 
     loginForm(): void {
+      this.emailNotFount=false;
+      this.passwrong=false;
       let body: LoginRequest = {
         email: this.loginDataForm.value.email as string,
+        password:this.loginDataForm.value.password as string
       };
       // Call the userLogin method from the UserService and handle the response
       this.userService.userLogin(body).subscribe((res: ApiResponse) => {
-        if (res.data != null) {
+        if (res.data != null && res.status!='Failed') {
           // User is successfully logged in; store user data in local storage and navigate to the chat page
           localStorage.setItem('user', JSON.stringify(res.data));
           this.router.navigate(['chat']);
         } else {
-          // User not found; set the 'userNotFound' flag to display an error message
-          this.userNotFound = true;
+          if(res.reason=='Email not found'){
+            this.emailNotFount = true;
+          }else if(res.reason=='Password is wrong'){
+            this.passwrong = true;
+          }else{
+            // User not found; set the 'userNotFound' flag to display an error message
+            this.userNotFound = true;
+          }
         }
       });
     }

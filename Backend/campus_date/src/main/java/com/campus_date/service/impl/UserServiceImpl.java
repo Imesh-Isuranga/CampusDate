@@ -3,6 +3,7 @@ package com.campus_date.service.impl;
 import com.campus_date.dao.StudentRepo;
 import com.campus_date.dao.ConversationRepository;
 import com.campus_date.dao.UserRepository;
+import com.campus_date.dto.LoginDTO;
 import com.campus_date.dto.StudentDTO;
 import com.campus_date.dto.ApiResponse;
 import com.campus_date.entity.Student;
@@ -78,24 +79,37 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ResponseEntity<ApiResponse> findUserByEmail(String email) {
-        User user = userRepository.findByEmail(email);
+    public ResponseEntity<ApiResponse> findUserByEmail(LoginDTO loginDTO) {
+        User user = userRepository.findByEmail(loginDTO.getEmail());
         if (user != null) {
-            return new ResponseEntity<>(
-                    ApiResponse.builder()
-                            .statusCode(200)
-                            .status("Success")
-                            .reason("OK")
-                            .data(user)
-                            .build(),
-                    HttpStatus.OK
-            );
+            Student student = studentRepo.findByUserId(user.getUserId());
+            if(passwordEncoder.matches(loginDTO.getPassword(), student.getPassword())){
+                return new ResponseEntity<>(
+                        ApiResponse.builder()
+                                .statusCode(200)
+                                .status("Success")
+                                .reason("OK")
+                                .data(user)
+                                .build(),
+                        HttpStatus.OK
+                );
+            }else{
+                return new ResponseEntity<>(
+                        ApiResponse.builder()
+                                .statusCode(200)
+                                .status("Failed")
+                                .reason("Password is wrong")
+                                .data(user)
+                                .build(),
+                        HttpStatus.OK
+                );
+            }
         } else {
             return new ResponseEntity<>(
                     ApiResponse.builder()
                             .statusCode(200)
                             .status("Failed")
-                            .reason("User not found")
+                            .reason("Email not found")
                             .data(null)
                             .build(),
                     HttpStatus.OK

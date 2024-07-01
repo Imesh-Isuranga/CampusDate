@@ -94,9 +94,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         'user/' + this.currentUser.userId,
         (payload: any) => {
           let res: WebSocketResponse = payload;
-          console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
-          console.log(res.data);
-          console.log(payload);
           if (res.type == 'ALL') {
             this.userConversations = res.data;
             const found = this.userConversations.find(

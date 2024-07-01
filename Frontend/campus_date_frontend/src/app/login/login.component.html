@@ -14,12 +14,14 @@
           <mat-card-content>
             <div class="row">
               <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                <mat-label style="color: rgb(93, 5, 2);"  *ngIf="emailNotFount==true">Email Not Found</mat-label>
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
                   <mat-label style="color: rgb(255, 234, 251);">Email</mat-label>
                   <input matInput formControlName="email"  style="color: aliceblue;">
                 </mat-form-field>
               </div>
               <div class=" col-12 col-sm-12 col-md-7 col-lg-7">
+                <mat-label style="color: rgb(93, 5, 2);"  *ngIf="passwrong==true">Password is Wrong</mat-label>
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
                   <mat-label style="color: rgb(255, 234, 251);">Password</mat-label>
                   <input  matInput formControlName="password" style="color: aliceblue;">

@@ -15,19 +15,23 @@
             <div class="row">
               <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">First Name</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enterfirstname==true">Enter First Name</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);" *ngIf="enterfirstname==false">First Name</mat-label>
                   <input matInput formControlName="first_Name"  style="color: aliceblue;">
                 </mat-form-field>
               </div>
               <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">Second Name</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="entersecondname==true">Enter Second Name</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);"  *ngIf="entersecondname==false">Second Name</mat-label>
                   <input matInput formControlName="second_Name"  style="color: aliceblue;">
                 </mat-form-field>
               </div>
               <div class=" col-12 col-sm-12 col-md-8 col-lg-8">
+                <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="emailAlreadyExists==true">Email already registered</mat-label>
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">Email</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enteremail==true">Enter Email</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);"  *ngIf="enteremail==false">Email</mat-label>
                   <input  matInput formControlName="email" style="color: aliceblue;">
                 </mat-form-field>
               </div>
@@ -35,13 +39,15 @@
             <div class="row">
               <div class=" col-12 col-sm-12 col-md-6 col-lg-6">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">University</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enteruniversity==true">Enter University</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);"  *ngIf="enteruniversity==false">University</mat-label>
                   <input matInput formControlName="university" style="color: aliceblue;">
                 </mat-form-field>
               </div>
               <div class=" col-12 col-sm-12 col-md-6 col-lg-6">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">Faculty</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enterfaculty==true">Enter Faculty</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);"  *ngIf="enterfaculty==false">Faculty</mat-label>
                   <input  matInput formControlName="faculty" style="color: aliceblue;">
                 </mat-form-field>
               </div>
@@ -49,13 +55,15 @@
             <div class="row">
               <div class=" col-12 col-sm-12 col-md-8 col-lg-8">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">Address</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enteraddress==true">Enter Address</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);" *ngIf="enteraddress==false">Address</mat-label>
                   <input  matInput formControlName="address" style="color: aliceblue;">
                 </mat-form-field>
               </div>
               <div class=" col-12 col-sm-12 col-md-4 col-lg-4">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                        <mat-label style="color: rgb(255, 234, 251);">DOB</mat-label>
+                        <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enterdob==true">Enter Date of Birth</mat-label>
+                        <mat-label style="color: rgb(255, 234, 251);"  *ngIf="enterdob==false">DOB</mat-label>
                         <input  formControlName="dob" matInput [matDatepicker]="picker">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -73,7 +81,8 @@
             <div class="row">
               <div class=" col-12 col-sm-12 col-md-8 col-lg-8">
                 <mat-form-field style="width: 100%;" appearance="outline" color="primary">
-                  <mat-label style="color: rgb(255, 234, 251);">Password</mat-label>
+                  <mat-label style="color: rgb(93, 5, 2); font-size: 12px;"  *ngIf="enterpassword==true">Enter password</mat-label>
+                  <mat-label style="color: rgb(255, 234, 251);"  *ngIf="enterpassword==false">Password</mat-label>
                   <input matInput formControlName="password" style="color: aliceblue;" [type]="hide ? 'password' : 'text'">
                   <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>

@@ -1,5 +1,6 @@
 package com.campus_date.controller;
 
+import com.campus_date.dto.LoginDTO;
 import com.campus_date.dto.StudentDTO;
 import com.campus_date.dto.ApiResponse;
 import com.campus_date.dto.LoginRequest;
@@ -31,8 +32,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest loginRequest) {
-        return userService.findUserByEmail(loginRequest.getEmail());
+    public ResponseEntity<ApiResponse> login(@RequestBody LoginDTO loginDTO) {
+        return userService.findUserByEmail(loginDTO);
     }
 
 
@@ -48,11 +49,13 @@ public class UserController {
     }
 
 
+/*
     @GetMapping("/logged/{userMail}")
     public ResponseEntity<ApiResponse> findAllUsersExceptThisUserId(@PathVariable String userMail) {
         return userService.findUserByEmail(userMail);
     }
 
+*/
 
     @GetMapping("/conversation/id")
     public ResponseEntity<ApiResponse> findConversationIdByUser1IdAndUser2Id(@RequestParam int user1Id, @RequestParam int user2Id) {
