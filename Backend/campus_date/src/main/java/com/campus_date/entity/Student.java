@@ -4,24 +4,21 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
 @Entity
-@Table(name="student")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "student")
 public class Student {
     @Id
     @Column(name="student_id", length = 45)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
 
-    @Column(name="student_name", length = 255)
-    private String studentName;
-
-    @Column(name="email", length = 255)
-    private String email;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 
     @Column(name="university", length = 255)
     private String university;
@@ -37,20 +34,6 @@ public class Student {
 
     @Column(name="gender", length = 10)
     private String gender;
-
-    @Column(name="interest_gender", length = 255)
-    private String interest_gender;
-
-    @Column(name="interest_age_limit", length = 255)
-    private String interest_age_limit;
-
-    @Column(name="interest_distric", length = 255)
-    private String interest_distric;
-
-    @ElementCollection
-    @CollectionTable(name = "images", joinColumns = @JoinColumn(name = "student_id"))
-    @Column(name = "image_url")
-    private List<String> imageUrls;
 
     @Column(name="password", length = 255)
     private String password;

@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginRequest } from '../chat_app/interfaces/login-request';
+import { UserService } from '../chat_app/services/user.service';
+import { ApiResponse } from '../chat_app/interfaces/api-response';
 
 @Component({
   selector: 'app-login',
@@ -10,34 +13,37 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private formBuilder:FormBuilder,private http:HttpClient,private router:Router){}
+  // Boolean flag to indicate whether a user was not found during login
+  userNotFound: boolean = false;
+
+  constructor(private userService: UserService, private formBuilder:FormBuilder,private http:HttpClient,private router:Router){
+        // Check if the user is already logged in, and if so, redirect to the chat page
+     /* if (localStorage.getItem('user') != null) {
+        this.router.navigate(['chat']);
+      }
+        */
+
+  }
 
   loginDataForm = this.formBuilder.group({
     email:[''],
     password:[''],
   });
 
- 
-  loginForm() {
- 
-    let bodyData = {
-      "email" : this.loginDataForm.value.email,
-      "password" : this.loginDataForm.value.password
-    };
- 
-        this.http.post("http://localhost:8085/api/v1/student/login", bodyData).subscribe(  (resultData: any) => {
- 
-        if (resultData.message == "Email not exits")
-        {
-          alert("Email not exits");
-        }
-        else if(resultData.message == "Login Success")
-        {
-          this.router.navigateByUrl('/home');
-        }
-        else
-        {
-          alert("Incorrect Email and Password not match");
+
+    loginForm(): void {
+      let body: LoginRequest = {
+        email: this.loginDataForm.value.email as string,
+      };
+      // Call the userLogin method from the UserService and handle the response
+      this.userService.userLogin(body).subscribe((res: ApiResponse) => {
+        if (res.data != null) {
+          // User is successfully logged in; store user data in local storage and navigate to the chat page
+          localStorage.setItem('user', JSON.stringify(res.data));
+          this.router.navigate(['chat']);
+        } else {
+          // User not found; set the 'userNotFound' flag to display an error message
+          this.userNotFound = true;
         }
       });
     }
